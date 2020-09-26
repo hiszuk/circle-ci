@@ -3,7 +3,7 @@ orbs:
   node: circleci/node@1.1.6
 jobs:
   # ジョブの名前（なんでもいいです）
-  build-deploy:
+  build-test:
     executor:
       name: node/default
     steps:
@@ -15,13 +15,7 @@ jobs:
             - run: yarn build
             # テスト
             - run: yarn test
-            # デプロイ
-            - run: echo "deploy start"
-            # cliからNetlifyにデプロイできるようにするライブラリをインストール
-            # - run: yarn add netlify-cli
-            # デプロイ（詳細は後述します）
-            # - run: yarn netlify deploy -p -d デプロイするディレクトリ名 -a ${Personal access tokensの名前} -s ${API IDの名前}
-  acceptance_test1:
+  build-deploy:
     executor:
       name: node/default
     steps:
@@ -29,12 +23,21 @@ jobs:
       - node/with-cache:
           steps:
             - run: yarn
-            - run: yarn test
+            - run: yarn build
+            # デプロイ
+            - run: echo "deploy start"
+            # cliからNetlifyにデプロイできるようにするライブラリをインストール
+            # - run: yarn add netlify-cli
+            # デプロイ（詳細は後述します）
+            # - run: yarn netlify deploy -p -d デプロイするディレクトリ名 -a ${Personal access tokensの名前} -s ${API IDの名前}
 
 workflows:
-  build-deploy:
+  wf-build-deploy:
     jobs:
-      # filtersの設定は必須ではありません。
-      # filtersを設定しない場合は、pushした際にブランチ問わずCircleCIが稼働します。
-      - build-deploy
-  
+      - build-test
+      - build-deploy:
+          filters:
+            branches:
+              only: master
+          requires:
+            - build-test
