@@ -1,4 +1,4 @@
-# cicle-ci
+# circle-ci
 
 ## Build Setup
 
