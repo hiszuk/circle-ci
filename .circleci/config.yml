@@ -1,9 +1,31 @@
-# Use the latest 2.1 version of CircleCI pipeline process engine. See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
+orbs:
+  node: circleci/node@1.1.6
 jobs:
-  build:
-    docker: 
-      - image: circleci/node:4.8.2 # ジョブのコマンドが実行されるプライマリ コンテナ
+  # ジョブの名前（なんでもいいです）
+  test-build-deploy:
+    executor:
+      name: node/default
     steps:
-      - checkout # プロジェクト ディレクトリ内のコードをチェック アウトします
-      - run: echo "hello world" # `echo` コマンドを実行します for test
+      - checkout
+      - node/with-cache:
+          steps:
+            - run: yarn
+            # テスト
+            - run: yarn test
+            # ビルド
+            - run: yarn build
+            # cliからNetlifyにデプロイできるようにするライブラリをインストール
+            # - run: yarn add netlify-cli
+            # デプロイ（詳細は後述します）
+            # - run: yarn netlify deploy -p -d デプロイするディレクトリ名 -a ${Personal access tokensの名前} -s ${API IDの名前}
+
+workflows:
+  test-build-deploy:
+    jobs:
+      # filtersの設定は必須ではありません。
+      # filtersを設定しない場合は、pushした際にブランチ問わずCircleCIが稼働します。
+      - build-and-test:
+          filters:
+            branches:
+              only: master
