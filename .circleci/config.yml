@@ -21,6 +21,13 @@ jobs:
             # - run: yarn add netlify-cli
             # デプロイ（詳細は後述します）
             # - run: yarn netlify deploy -p -d デプロイするディレクトリ名 -a ${Personal access tokensの名前} -s ${API IDの名前}
+  acceptance_test1:
+    executor:
+      name: node/default
+    steps:
+      - node/with-cache:
+          steps:
+            - run: yarn test
 
 workflows:
   build-deploy:
@@ -31,3 +38,10 @@ workflows:
           filters:
             branches:
               only: master
+      - acceptance_test1:
+          requires:
+            - build-deploy
+          filters:
+            branches:
+              only: master
+  
