@@ -50,7 +50,7 @@ workflows:
             branches:
               only: master
       - acceptance_test_01:
-          rquires:
+          requires:
             - build
       - build-for-deploy:
           requires:
