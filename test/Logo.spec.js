@@ -6,4 +6,7 @@ describe('Logo', () => {
     const wrapper = mount(Logo)
     expect(wrapper.vm).toBeTruthy()
   })
+  test('always false', () => {
+    return false
+  })
 })
