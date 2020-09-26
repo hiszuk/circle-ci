@@ -52,11 +52,12 @@ html {
   color: #326eb3;
   text-decoration: none;
   padding: 10px 30px;
+  margin-left: 15px;
 }
 
 .button--blue:hover {
   color: #fff;
-  background-color: #3b7880;
+  background-color: #1e388f;
 }
 
 .button--grey {
@@ -72,5 +73,39 @@ html {
 .button--grey:hover {
   color: #fff;
   background-color: #35495e;
+}
+
+.global-header {
+  background-color: #35495e;
+  display: block;
+  padding-bottom: 10px;
+  width: 100%;
+}
+.site-title {
+  color: white;
+  font-weight: bold;
+  font-size: 200%; 
+  margin-left: 20px;
+}
+
+.menu {
+  display: flex;
+  float: right;
+  margin-top: -1.8rem;
+  margin-right: 20px;
+}
+.menu-item-label {
+  display: inline;
+  border-radius: 4px;
+  border: 1px solid #35495e;
+  color: white;
+  background-color: #40576e;
+  text-decoration: none;
+  padding: 10px 30px;
+  margin-left: 15px;
+}
+.menu-item-label:hover {
+  color: #35495e;
+  background-color: white;
 }
 </style>

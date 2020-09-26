@@ -1,48 +1,64 @@
 <template>
-  <div class="container">
-    <div>
-      <Logo />
-      <h1 class="title">
-        circle-ci
-      </h1>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--green"
-        >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--grey"
-        >
-          GitHub
-        </a>
-        <a
-          href="https://caferec.cf/report/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--blue"
-        >
-          CafeRec Report
-        </a>
+  <div>
+    <GlobalHeader @navigate="navigate" />
+    <div class="container">
+      <div>
+        <Logo />
+        <h1 class="title">
+          circle-ci
+        </h1>
+        <div class="links">
+          <LinkButton
+            label="Documentation"
+            type="green"
+            @click="navigate({ name: 'https://nuxtjs.org/' })"
+          />
+          <LinkButton
+            label="GitHub"
+            type="grey"
+            @click="navigate({ name: 'https://github.com/nuxt/nuxt.js' })"
+          />
+          <LinkButton
+            label="Dummy Button"
+            type="blue"
+            @click="navigate({ name: '/' })"
+          />
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-export default {}
+import GlobalHeader from "~/containers/GlobalHeader";
+import Logo from "~/basics/Logo";
+import LinkButton from "~/basics/LinkButton";
+export default {
+  components: {
+    GlobalHeader,
+    Logo,
+    LinkButton
+  },
+  methods: {
+    isInternalLink(path) {
+      return !/^http/.test(path)
+    },
+    navigate({ name }) {
+      console.log(`Nvigate: ${name}`);
+      if (this.isInternalLink(name)) {
+        this.$router.push(name);
+      } else {
+        location.href = name;
+      }
+    }
+  }
+};
 </script>
 
 <style>
 .container {
   margin: 0 auto;
-  min-height: 100vh;
+  min-height: calc(100vh - 60px);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -50,16 +66,8 @@ export default {}
 }
 
 .title {
-  font-family:
-    'Quicksand',
-    'Source Sans Pro',
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    'Helvetica Neue',
-    Arial,
-    sans-serif;
+  font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   display: block;
   font-weight: 300;
   font-size: 100px;
