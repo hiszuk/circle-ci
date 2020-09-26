@@ -22,6 +22,14 @@
         >
           GitHub
         </a>
+        <a
+          href="https://caferec.cf/report/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="button--grey"
+        >
+          CafeRec Report
+        </a>
       </div>
     </div>
   </div>
