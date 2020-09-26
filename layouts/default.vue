@@ -45,6 +45,20 @@ html {
   background-color: #3b8070;
 }
 
+.button--blue {
+  display: inline-block;
+  border-radius: 4px;
+  border: 1px solid #803b7a;
+  color: #7e3b80;
+  text-decoration: none;
+  padding: 10px 30px;
+}
+
+.button--blue:hover {
+  color: #fff;
+  background-color: #803b7d;
+}
+
 .button--grey {
   display: inline-block;
   border-radius: 4px;

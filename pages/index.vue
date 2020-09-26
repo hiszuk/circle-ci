@@ -26,7 +26,7 @@
           href="https://caferec.cf/report/"
           target="_blank"
           rel="noopener noreferrer"
-          class="button--grey"
+          class="button--red"
         >
           CafeRec Report
         </a>
