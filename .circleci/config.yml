@@ -40,10 +40,10 @@ workflows:
           filters:
             branches:
               only: master
-      - acceptance_test1:
-          requires:
-            - build-deploy
-          filters:
-            branches:
-              only: master
+      # - acceptance_test1:
+      #     requires:
+      #       - build-deploy
+      #     filters:
+      #       branches:
+      #         only: master
   
