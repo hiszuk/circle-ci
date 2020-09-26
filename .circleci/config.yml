@@ -25,8 +25,10 @@ jobs:
     executor:
       name: node/default
     steps:
+      - checkout
       - node/with-cache:
           steps:
+            - run: yarn
             - run: yarn test
 
 workflows:
