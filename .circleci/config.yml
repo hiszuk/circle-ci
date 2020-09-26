@@ -29,6 +29,8 @@ jobs:
             # ビルド
             - run: yarn build
   deploy:
+    executor:
+      name: node/default
     steps:
       - node/with-cache:
           steps:
