@@ -15,7 +15,9 @@ module.exports = {
   },
   collectCoverage: true,
   collectCoverageFrom: [
+    '<rootDir>/basics/**/*.vue',
     '<rootDir>/components/**/*.vue',
+    '<rootDir>/containers/**/*.vue',
     '<rootDir>/pages/**/*.vue'
   ]
 }

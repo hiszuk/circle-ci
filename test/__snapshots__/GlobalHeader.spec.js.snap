@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GlobalHeader.vue template確認 snapshot 1`] = `
+<header
+  class="global-header"
+>
+  <span
+    class="global-header-title"
+  >
+    <sitetitle-stub
+      title="test site title"
+    />
+  </span>
+   
+  <menu-stub
+    class="global-header-menu"
+    items="[object Object],[object Object]"
+  />
+</header>
+`;

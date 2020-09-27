@@ -1,60 +1,54 @@
-import { shallowMount } from '@vue/test-utils'
-import LinkButton from '@/basics/LinkButton.vue'
+import { shallowMount } from "@vue/test-utils";
+import LinkButton from "@/basics/LinkButton.vue";
 
-describe('LinkButton.vue', () => {
-  const propsData = {
-    type: 'blue',
-    label: 'ButtonName'
-  }
+const label = "ButtonName";
+const factory = propsData => {
+  return shallowMount(LinkButton, {
+    propsData: {
+      label,
+      ...propsData
+    }
+  });
+};
 
-  describe('props', () => {
-    test('propsの型が合っているか(label)', () => {
-      const wrapper = shallowMount(LinkButton, { propsData })
-      expect(typeof wrapper.vm.$props.label).toBe('string')
-    })
-  })
+describe("LinkButton.vue", () => {
+  describe("ラベル指定あり", () => {
+    it("リンクボタン表示", () => {
+      const wrapper = factory({ type: "blue" });
+      expect(wrapper.vm.$props.label).toBe(label);
+      expect(wrapper.vm.$props.type).toBe("blue");
+      expect(typeof wrapper.vm.$props.label).toBe("string");
+      expect(typeof wrapper.vm.$props.type).toBe("string");
+      expect(wrapper.vm.$options.props.label.required).toBe(true);
+      expect(wrapper.vm.$options.props.type.required).toBe(false);
+    });
+  });
 
-  describe('props', () => {
-    test('propsの型が合っているか(type)', () => {
-      const wrapper = shallowMount(LinkButton, { propsData })
-      expect(typeof wrapper.vm.$props.type).toBe('string')
-    })
-  })
+  describe("ラベル指定なし", () => {
+    it("リンクボタン表示", () => {
+      const wrapper = factory();
+      expect(wrapper.vm.$props.label).toBe(label);
+      expect(wrapper.vm.$props.type).toBe("grey");
+    });
+  });
 
-  describe('props', () => {
-    test('propsが必須となっているか(label)', () => {
-      const wrapper = shallowMount(LinkButton, { propsData })
-      expect(wrapper.vm.$options.props.label.required).toBe(true)
-    })
-  })
-
-  describe('props', () => {
-    test('propsが必須となっていない(type)', () => {
-      const wrapper = shallowMount(LinkButton, { propsData })
-      expect(wrapper.vm.$options.props.type.required).toBe(false)
-    })
-  })
-
-  describe('props', () => {
-    test('propsを受け取れること(label)', () => {
-      const wrapper = shallowMount(LinkButton, { propsData })
-      expect(wrapper.vm.$props.label).toBe(propsData.label)
-    })
-  })
-
-  describe('props', () => {
-    test('propsを受け取れること(type)', () => {
-      const wrapper = shallowMount(LinkButton, { propsData })
-      expect(wrapper.vm.$props.type).toBe(propsData.type)
-    })
-  })
-
-  describe('template', () => {
-    it('snapshot', () => {
-      const wrapper = shallowMount(LinkButton, { propsData })
+  describe("template", () => {
+    it("snapshot", () => {
+      const wrapper = factory({ type: "blue" });
       // レンダリング結果がスナップショットと同じか
-      expect(wrapper.vm.$el).toMatchSnapshot()
-    })
-  })
+      expect(wrapper.vm.$el).toMatchSnapshot();
+    });
+  });
 
-})
+  describe("LinkButtonClick", () => {
+    it("ボタンクリックでメソッドが起動されるか?", () => {
+      const wrapper = factory();
+
+      // DOMを探してクリックする
+      wrapper.find(".button--grey").trigger("click")
+      // mockがコールされたか？
+      expect(wrapper.emitted().click[0]).toEqual([]);
+    });
+  });
+
+});

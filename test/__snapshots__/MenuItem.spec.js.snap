@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MenuItem.vue template snapshot 1`] = `
+<div
+  class="menu-item"
+>
+  <a
+    class="menu-item-label"
+  >
+    
+    MenuLabel
+  
+  </a>
+</div>
+`;
